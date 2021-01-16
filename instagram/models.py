@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -37,5 +38,15 @@ class Profile(models.Model):
     
     def delete_profile(self):
         self.delete()
+
+    def profiles_posts(self):
+        return self.image_set.all()
+
+
+    @classmethod
+    def search_profile(cls, name):
+        return cls.objects.filter(user__username__icontains=name).all()
+
+
 
 
