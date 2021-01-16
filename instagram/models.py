@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class Image(models.Model):
     image= models.ImageField('image')
-        author= models.ForeignKey(Profile, on_delete=models.CASCADE)
+    author= models.ForeignKey(Profile, on_delete=models.CASCADE)
     name= models.CharField(max_length=30)
     caption= models.TextField()
     comments = models.CharField(max_length=30,blank=True)
@@ -42,11 +42,17 @@ class Profile(models.Model):
     def profiles_posts(self):
         return self.image_set.all()
 
+    def save(self):
+        super().save()
+
 
     @classmethod
     def search_profile(cls, name):
         return cls.objects.filter(user__username__icontains=name).all()
 
+
+    def __str__(self):
+        return f'{self.user.username} Profile'
 
 
 class Comment(models.Model):
@@ -59,4 +65,10 @@ class Comment(models.Model):
 
 
 
+class Follow(models.Model):
+    follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following')
+    followed = models.ForeignKey(User, on_delete=models.CASCADE, related_name='followers')
+
+    def __str__(self):
+        return f'{self.follower} Follow'    
 
