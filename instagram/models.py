@@ -32,3 +32,10 @@ class Profile(models.Model):
     following= models.ManyToManyField(User, related_name='follower', blank=True)
     created=models.DateTimeField(auto_now_add=True)
 
+    def save_profile(self):
+        self.save()
+    
+    def delete_profile(self):
+        self.delete()
+
+
