@@ -15,5 +15,9 @@ class Image(models.Model):
 
     def delete_image(self):
         self.delete()
+
+    def update_image(self):
+        self._do_update()
+    
     
 
