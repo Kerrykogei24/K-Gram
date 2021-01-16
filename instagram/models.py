@@ -10,3 +10,10 @@ class Image(models.Model):
     likes=models.ManyToManyField(User, related_name='blog_posts')
     pub_date=models.DateTimeField(auto_now_add=True)
 
+    def save_image(self):
+        self.save()
+
+    def delete_image(self):
+        self.delete()
+    
+
