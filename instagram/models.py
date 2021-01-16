@@ -4,6 +4,7 @@ from django.db import models
 
 class Image(models.Model):
     image= models.ImageField('image')
+        author= models.ForeignKey(Profile, on_delete=models.CASCADE)
     name= models.CharField(max_length=30)
     caption= models.TextField()
     comments = models.CharField(max_length=30,blank=True)
