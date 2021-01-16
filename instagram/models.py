@@ -19,5 +19,15 @@ class Image(models.Model):
     def update_image(self):
         self._do_update()
     
+    def __str__(self):
+        return self.name
     
+
+
+class Profile(models.Model):
+    user=models.OneToOneField(User,null=True, on_delete=models.CASCADE)
+    bio= models.CharField(max_length=100)
+    prof_pic= models.ImageField('image')
+    following= models.ManyToManyField(User, related_name='follower', blank=True)
+    created=models.DateTimeField(auto_now_add=True)
 
