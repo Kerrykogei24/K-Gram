@@ -4,12 +4,11 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Image(models.Model):
-    image= models.ImageField('image')
-    author= models.ForeignKey(Profile, on_delete=models.CASCADE)
+    image= models.ImageField(upload_to ='image/')
     name= models.CharField(max_length=30)
-    caption= models.TextField()
-    comments = models.CharField(max_length=30,blank=True)
-    likes=models.ManyToManyField(User, related_name='blog_posts')
+    caption= models.CharField(max_length= 300)
+    likes=models.ManyToManyField(User, related_name='likes', blank=True)
+    user = models.ForeignKey(User,on_delete = models.CASCADE)
     pub_date=models.DateTimeField(auto_now_add=True)
 
     def save_image(self):
@@ -20,7 +19,13 @@ class Image(models.Model):
 
     def update_image(self):
         self._do_update()
-    
+
+        
+    @classmethod
+    def all_images(cls):
+        timeline_pics = cls.objects.all()
+        return timeline_pics
+
     def __str__(self):
         return self.name
     

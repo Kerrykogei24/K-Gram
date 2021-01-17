@@ -4,6 +4,6 @@ from .models import Image, Profile, Follow, Comment
 # Create your views here.
 def index(request):
     posts = Image.objects.all()
-    comments = Comment.objects.filter(image_id).all()
+    comments = Comment.objects.filter.all()
 
-    return render(request, 'index.html',{'posts':posts,'comments':comments}
+    return render(request, 'index.html',{'posts':posts,'comments':comments})
