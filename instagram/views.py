@@ -56,5 +56,18 @@ def comment(request,id):
 def single_pic(request,id):
 
     post = Image.objects.get(id = id)
-    comments = Comments.objects.filter(ig_pic_id = id)
+    comments = Comments.objects.filter(pic_id = id)
     return render(request,'single_pic.html',{'post':post,"comments":comments})
+
+@login_required(login_url = '/accounts/login/')
+def search_results(request):
+    if 'image' in request.GET and request.GET['image']:
+        search_term = request.GET.get('image')
+        searched_pics = Image.search_image(search_term)
+        message = f'{search_term}'
+
+        return render(request,'search.html',{'message':message,'image':searched_pics})
+
+    else:
+        message = "You have not entered anything to search"
+        return render(request,'search.html',{"message":message})
