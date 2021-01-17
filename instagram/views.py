@@ -5,9 +5,9 @@ from .models import Image, Profile,Comments
 @login_required(login_url = '/accounts/login/')
 def index(request):
     posts = Image.all_images()
-  
-
     return render(request, 'index.html',{'posts':posts})
+
+    
 def signUp(request):    
     if request.method=='POST':
         form = SignUpForm(request.POST)
@@ -42,6 +42,25 @@ def edit_profile(request):
     else:
         form = EditProfileForm(instance=request.user)
     return render(request,'update_profile.html',{'form':form})
+
+
+
+@login_required(login_url = '/accounts/login/')
+def new_post(request):
+    if request.method=='POST':
+        form = NewPostForm(request.POST,request.FILES)
+        if form.is_valid():
+            post=form.save(commit=False)
+            post.user = request.user
+            post.save()
+
+            return redirect('timeline')
+
+    else:
+        form = NewPostForm()
+        
+    return render(request,'new_post.html',{'form':form})
+
 
 @login_required(login_url = '/accounts/login/')
 def comment(request,id):
