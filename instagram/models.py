@@ -72,20 +72,21 @@ class Profile(models.Model):
         return self.username
 
 
-class Comment(models.Model):
-    user_id= models.ForeignKey(Profile, on_delete=models.CASCADE)
-    comment=models.CharField(max_length=200)
-    image_id=models.ForeignKey(Image,on_delete=models.CASCADE)
+class Comments(models.Model):
+    ig_pic_id = models.ForeignKey(Image,on_delete=models.CASCADE)
+    text = models.CharField(max_length=1500)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.user_id} :{self.comment}'
+        return self.user
 
 
+    def save_comments(self):
+        self.save()
 
-class Follow(models.Model):
-    follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following')
-    followed = models.ForeignKey(User, on_delete=models.CASCADE, related_name='followers')
+    
+    def delete_comment(self):
+        self.delete()
 
-    def __str__(self):
-        return f'{self.follower} Follow'    
+
 
