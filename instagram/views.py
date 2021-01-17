@@ -50,4 +50,11 @@ def comment(request,id):
         id = id
         form =CommentForm()
         return render(request,"comment.html",{'form':form,"id":id})
-        
+
+
+@login_required(login_url = '/accounts/login/')
+def single_pic(request,id):
+
+    post = Image.objects.get(id = id)
+    comments = Comments.objects.filter(ig_pic_id = id)
+    return render(request,'single_pic.html',{'post':post,"comments":comments})
