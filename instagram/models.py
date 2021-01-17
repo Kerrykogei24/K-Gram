@@ -33,7 +33,7 @@ class Image(models.Model):
 
     @classmethod
     def search_image(cls,search_term):
-        
+
          searched_image = cls.objects.filter(name =search_term)
         return searched_image
 
@@ -44,11 +44,9 @@ class Image(models.Model):
 
 
 class Profile(models.Model):
-    user=models.OneToOneField(User,null=True, on_delete=models.CASCADE)
-    bio= models.CharField(max_length=100)
-    prof_pic= models.ImageField('image')
-    following= models.ManyToManyField(User, related_name='follower', blank=True)
-    created=models.DateTimeField(auto_now_add=True)
+    profile_pic = models.ImageField(upload_to='image/')
+    bio = models.CharField(max_length=300)
+    username = models.CharField(max_length=50,default='Your username')
 
     def save_profile(self):
         self.save()
@@ -59,17 +57,19 @@ class Profile(models.Model):
     def profiles_posts(self):
         return self.image_set.all()
 
-    def save(self):
-        super().save()
+  
 
 
-    @classmethod
-    def search_profile(cls, name):
-        return cls.objects.filter(user__username__icontains=name).all()
+  
+    def search_profile(cls, username):
+
+       found_user = User.objects.get(username = username)
+
+       return found_user
 
 
     def __str__(self):
-        return f'{self.user.username} Profile'
+        return self.username
 
 
 class Comment(models.Model):
