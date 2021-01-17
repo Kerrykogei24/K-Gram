@@ -71,3 +71,10 @@ def search_results(request):
     else:
         message = "You have not entered anything to search"
         return render(request,'search.html',{"message":message})
+
+@login_required(login_url="/accounts/login/")
+def logout_request(request):
+
+    logout(request)
+    return redirect('timeline')
+
