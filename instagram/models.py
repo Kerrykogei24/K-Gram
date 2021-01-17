@@ -73,7 +73,7 @@ class Profile(models.Model):
 
 
 class Comments(models.Model):
-    ig_pic_id = models.ForeignKey(Image,on_delete=models.CASCADE)
+    pic_id = models.ForeignKey(Image,on_delete=models.CASCADE)
     text = models.CharField(max_length=1500)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
 
@@ -88,5 +88,9 @@ class Comments(models.Model):
     def delete_comment(self):
         self.delete()
 
+    @classmethod
+    def get_comments(cls,id):
+        comments = cls.objects.filter(pic_id=id)
+        return comments
 
 
