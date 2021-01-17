@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from .models import Image, Profile, Follow, Comment
+from .models import Image, Profile,Comments
 
 # Create your views here.
 def index(request):
-    posts = Image.objects.all()
-    comments = Comment.objects.filter.all()
+    posts = Image.all_images()
+  
 
-    return render(request, 'index.html',{'posts':posts,'comments':comments})
+    return render(request, 'index.html',{'posts':posts})
