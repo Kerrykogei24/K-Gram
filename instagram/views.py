@@ -1,5 +1,12 @@
-from django.shortcuts import render
-from .models import Image, Profile,Comments
+from django.shortcuts import render,redirect,get_object_or_404
+from django.http import HttpResponse,Http404
+from .models import Image,Profile,Comments
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
+from .forms import NewPostForm,SignUpForm,EditProfileForm,CommentForm
+from django.contrib import messages
+from django.contrib.auth import logout
 
 # Create your views here.
 @login_required(login_url = '/accounts/login/')
@@ -7,7 +14,7 @@ def index(request):
     posts = Image.all_images()
     return render(request, 'index.html',{'posts':posts})
 
-    
+
 def signUp(request):    
     if request.method=='POST':
         form = SignUpForm(request.POST)
