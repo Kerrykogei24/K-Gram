@@ -1,5 +1,4 @@
 from . import views
-from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import url,include
@@ -8,7 +7,8 @@ from django.conf.urls import url,include
 
 
 urlpatterns = [
-    path('',views.index, name = 'landing'),
+    url(r'^$',views.index, name = 'landing'),
+    url(r'^accounts/profile/$',views.profile,name='profile'),
 ]
 
 if settings.DEBUG:
