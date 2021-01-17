@@ -7,3 +7,9 @@ def index(request):
   
 
     return render(request, 'index.html',{'posts':posts})
+
+
+def profile(request):
+
+    user_posts = Image.user_pics(request.user)
+    return render(request,'profile.html',{'user_posts':user_posts})
