@@ -20,11 +20,17 @@ class Image(models.Model):
     def update_image(self):
         self._do_update()
 
-        
+
     @classmethod
     def all_images(cls):
         timeline_pics = cls.objects.all()
         return timeline_pics
+
+    @classmethod
+    def user_pics(cls,user):
+        user_pic = cls.objects.filter(user = user)
+        return user_pic
+
 
     def __str__(self):
         return self.name
