@@ -31,6 +31,12 @@ class Image(models.Model):
         user_pic = cls.objects.filter(user = user)
         return user_pic
 
+    @classmethod
+    def search_image(cls,search_term):
+        
+         searched_image = cls.objects.filter(name =search_term)
+        return searched_image
+
 
     def __str__(self):
         return self.name
