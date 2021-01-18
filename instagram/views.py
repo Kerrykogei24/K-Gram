@@ -8,7 +8,7 @@ from .forms import NewPostForm,SignUpForm,EditProfileForm,CommentForm
 from django.contrib import messages
 from django.contrib.auth import logout
 
-
+@login_required(login_url = '/accounts/login/')
 def index(request):
     posts = Image.all_images()
     return render(request, 'index.html',{'posts':posts})
@@ -78,7 +78,7 @@ def comment(request,id):
             comment = form.save(commit=False)
             comment.user = request.user
             image = Image.objects.get(id = id)
-            comment.ig_pic_id = image
+            comment.pic_id = image
             comment.save()
             return redirect('timeline')
 

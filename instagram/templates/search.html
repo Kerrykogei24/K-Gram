@@ -11,7 +11,7 @@
         {% if image %} {% for my_image in image %}
         <div class="col-md-6">
             <h1> {{my_image.name}}</h1>
-            <img width="450px" src="{{my_image.ig_pic.url}}" alt="image">
+            <img width="450px" src="{{my_image.pic.url}}" alt="image">
             <h3>{{image.description}}</h3>
         </div>
         {% endfor %} {% endif %}
