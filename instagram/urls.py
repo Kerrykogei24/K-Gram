@@ -11,7 +11,7 @@ urlpatterns=[
     url(r'^singlepic/(\d+)',views.single_pic,name='singlepic'),
     url(r'^search/',views.search_results,name = 'search_results'),
     url(r'^logout/$',views.logout_request,name="logout"),
-    url(r'^comment/$',views.comment,name='comment'),
+    url(r'^comment/<int:id>/',views.comment,name='comment'),
     
 ]
 

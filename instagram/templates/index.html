@@ -1,18 +1,26 @@
-{% extends 'base.html' %} {% load bootstrap4 %} {% block content %}
+{% extends 'base.html' %} {% load bootstrap3 %} {% block content %}
 <div class="container">
     <h2 style="text-align: center;">News Feed</h2>
     <div class="row">
         {% for pic in posts %}
+
+
         <div class="card" style="width:500px">
-            <h4 style="text-align: center;" class="card-title pictitle"> {{pic.name}} </h4>
+            <h2 style="text-align: center;" class="card-title pictitle"> {{pic.name}} </h2>
             <a href="/singlepic/{{pic.id}}">
-                <img class="timelinepics card-img-top" width="500px" height="450px" src=" {{pic.pic.url}} " alt="Image"></a>
+                <img class="timelinepics card-img-top" width="500px" height="450px" src=" {{pic.ig_pic.url}} " alt="Image"></a>
             <div class="card-body">
 
-                <p style="text-align: center;" class="card-text">{{pic.caption}}</p>
+                <h3 style="text-align: center;" class="card-text">{{pic.caption}}
+                </h3>
                 <p class="card-text">Posted by: {{pic.user}}</p>
+
+
+
                 <div class="card-footer">
-                    <a href="{%url 'comment' pic.id%}" class="btn btn-outline "> <button>Comment</button></a>
+                    <a href="{%url 'comment' pic.id%}">
+                        <button class="btn btn-primary">Comment</button>
+                    </a>
 
 
                 </div>
@@ -20,10 +28,37 @@
             </div>
         </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
         {% empty %}
         <div class="row">
             <h2>No images at the moment</h2>
         </div>
         {% endfor %}
     </div>
-</div>{% endblock %}
+</div>
+<style>
+    .pictitle {
+        margin-top: 3%;
+    }
+    
+    .card {
+        margin: 3%;
+    }
+    
+    .timelinepics {
+        height: 400px;
+        transition: transform .2s;
+    }
+</style>
+{% endblock %}
