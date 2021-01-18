@@ -1,21 +1,40 @@
-{% load bootstrap4 %}{% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'registration/base.html' %} {% load bootstrap4 %} {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            {% if form.errors %}
+            <p>Some credentials might be incorrect</p>
+            {% endif %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="text-center">
+                        Sign up
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <form action="/accounts/register/" method="post">
+                        {% csrf_token %} {% bootstrap_form form %}
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
+                        </div>
+                        <input type="hidden" name="next" value=" {{next}} ">
+                    </form>
+                    <a href="/accounts/login/"> <button> Log In</button> </a>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"> {% if title %}
-    <title>
-        {{title}}
-    </title>
-    {% endif %} {% block styles %} {% bootstrap_css %} {% endblock %}
-</head>
+                </div>
 
-<body>
-    {% block content %} {% endblock %} {% block scripts %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    {% bootstrap_javascript %} {% endblock %}
-</body>
-
-</html>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+<style>
+    body {
+        background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnJnGdIix1Vh0AHbyneggDM3krG7lov8ZnmB_JXLMwtKYCYc3L&s");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+</style>
+{% endblock %}
