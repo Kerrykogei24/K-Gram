@@ -8,8 +8,7 @@ from .forms import NewPostForm,SignUpForm,EditProfileForm,CommentForm
 from django.contrib import messages
 from django.contrib.auth import logout
 
-# Create your views here.
-@login_required(login_url = '/accounts/login/')
+
 def index(request):
     posts = Image.all_images()
     return render(request, 'index.html',{'posts':posts})
@@ -72,7 +71,7 @@ def new_post(request):
 @login_required(login_url = '/accounts/login/')
 def comment(request,id):
 
-       id =id
+    id =id
     if request.method=='POST':
         form = CommentForm(request.POST)
         if form.is_valid():
