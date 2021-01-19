@@ -1,17 +1,17 @@
-{% extends 'base.html' %} {% load bootstrap3 %} {% load static %} {% block content %}
+{% extends 'base.html' %} {% load bootstrap4 %} {% load static %} {% block content %}
 <div class="container">
 
     <div class="row">
         <div class="card" style="width:400px">
             <h4 style="text-align: center;" class="card-title pictitle"> {{post.name}} </h4>
-            <img class="card-img-top" width="500px" height="450px" src=" {{post.ig_pic.url}}" alt="{{post.name}}">
+            <img class="card-img-top" width="500px" height="450px" src=" {{post.pic.url}}" alt="{{post.name}}">
             <div class="card-body">
                 <h4 class="card-title"> {{post.caption}}</h4>
                 <p class="card-text"><b>Posted by:</b> {{post.user}} </p>
                 <button class="btn btn-primary">Likes: {{post.likes.count}}</button>
 
                 <a href="{%url 'comment' post.id%}" class="btn btn-primary">Comment</a>
-                <form action="{% url 'like' %}" method="post">
+                <form action="{% url 'like_post' %}" method="post">
                     {% csrf_token %}
 
                 </form>

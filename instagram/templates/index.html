@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load bootstrap3 %} {% block content %}
+{% extends 'base.html' %} {% load bootstrap4 %} {% block content %}
 <div class="container">
     <h2 style="text-align: center;">News Feed</h2>
     <div class="row">
@@ -8,7 +8,7 @@
         <div class="card" style="width:500px">
             <h2 style="text-align: center;" class="card-title pictitle"> {{pic.name}} </h2>
             <a href="/singlepic/{{pic.id}}">
-                <img class="timelinepics card-img-top" width="500px" height="450px" src=" {{pic.ig_pic.url}} " alt="Image"></a>
+                <img class="timelinepics card-img-top" width="500px" height="450px" src=" {{pic.pic.url}} " alt="Image"></a>
             <div class="card-body">
 
                 <h3 style="text-align: center;" class="card-text">{{pic.caption}}

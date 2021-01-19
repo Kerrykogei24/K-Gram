@@ -1,7 +1,9 @@
 from django.conf.urls import url,include
 from . import views
+from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import (PostDetailView)
 
 urlpatterns=[
     url(r'^$',views.index,name = 'timeline'),
@@ -11,7 +13,8 @@ urlpatterns=[
     url(r'^singlepic/(\d+)',views.single_pic,name='singlepic'),
     url(r'^search/',views.search_results,name = 'search_results'),
     url(r'^logout/$',views.logout_request,name="logout"),
-    url(r'^comment/<int:id>/',views.comment,name='comment'),
+    path('comment/<int:id>/',views.comment,name='comment'),
+    path('like/<int:pk>/', views.like_image, name='like_post'),
     
 ]
 

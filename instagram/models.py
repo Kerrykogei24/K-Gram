@@ -17,8 +17,17 @@ class Image(models.Model):
     def delete_image(self):
         self.delete()
 
+
+    def total_likes(self):
+        return self.likes.count()
+
+
     def update_image(self):
         self._do_update()
+
+    def get_absolute_url(self):
+        return reverse('singlepic', kwargs={'pk':self.pk})
+
 
 
     @classmethod

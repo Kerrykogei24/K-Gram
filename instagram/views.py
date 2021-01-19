@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 from .forms import NewPostForm,SignUpForm,EditProfileForm,CommentForm
 from django.contrib import messages
 from django.contrib.auth import logout
+from django.views.generic import (DetailView)
 
 @login_required(login_url = '/accounts/login/')
 def index(request):
@@ -118,3 +119,19 @@ def logout_request(request):
     logout(request)
     return redirect('timeline')
 
+class PostDetailView(DetailView):
+    model = Image
+    template_name= 'single_pic.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context=super(PostDetailView, self).get_context_data(*args, **kwargs)
+        stuff=get_object_or_404(Image, id=self.kwargs['pk'])
+        total_likes=stuff.total_likes()
+        context["total_likes"]=total_likes
+        return context
+
+
+def like_image(request, pk):
+    post= get_object_or_404(Image, id=request.POST.get('post_id'))
+    post.likes.add(request.user)
+    return HttpResponseRedirect(reverse('singlepic', args=[str(pk)]))
