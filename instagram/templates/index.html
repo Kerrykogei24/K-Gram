@@ -8,14 +8,22 @@
         <div class="card" style="width:500px">
             <h2 style="text-align: center;" class="card-title pictitle"> {{pic.name}} </h2>
             <a href="/singlepic/{{pic.id}}">
-                <img class="timelinepics card-img-top" width="500px" height="450px" src=" {{pic.pic.url}} " alt="Image"></a>
+                <img class="timelinepics card-img-top" width="500px" height="450px" src=" {{pic.image.url}} " alt="Image"></a>
             <div class="card-body">
 
                 <h3 style="text-align: center;" class="card-text">{{pic.caption}}
                 </h3>
                 <p class="card-text">Posted by: {{pic.user}}</p>
+                <div class="react">
+                    <a href="{% url 'singlepic' pic.id %}"><img src="https://img.icons8.com/ios-glyphs/30/000000/hearts.png" /></a>
+                    <a href="{%url 'comment' pic.id%}"><img data-toggle="collapse" data-target="#commentSec{{pic.id}}" src="https://img.icons8.com/metro/26/000000/comments.png" /></a>
+                    </a>
+                </div>
+                <div class="react">
+                    <p><span style="font-weight: bold;">{{pic.likes}}</span> Likes</p>
+                    <p><span style="font-weight: bold;">{{pic.comment_set.all | length}}</span> Comments</p>
 
-
+                </div>
 
                 <div class="card-footer">
                     <a href="{%url 'comment' pic.id%}">
@@ -27,8 +35,6 @@
 
             </div>
         </div>
-
-
 
 
 

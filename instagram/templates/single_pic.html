@@ -4,14 +4,24 @@
     <div class="row">
         <div class="card" style="width:400px">
             <h4 style="text-align: center;" class="card-title pictitle"> {{post.name}} </h4>
-            <img class="card-img-top" width="500px" height="450px" src=" {{post.pic.url}}" alt="{{post.name}}">
+            <img class="card-img-top" width="500px" height="450px" src=" {{post.image.url}}" alt="{{post.name}}">
             <div class="card-body">
                 <h4 class="card-title"> {{post.caption}}</h4>
                 <p class="card-text"><b>Posted by:</b> {{post.user}} </p>
-                <button class="btn btn-primary">Likes: {{post.likes.count}}</button>
+                <div class="react">
+                    <a href=""><img src="https://img.icons8.com/ios-glyphs/30/000000/hearts.png" /></a>
+                    <a href="{%url 'comment' post.id%}"><img data-toggle="collapse" src="https://img.icons8.com/metro/26/000000/comments.png" /></a>
+                    </a>
+                </div>
+                <div class="react">
+                    <p><span style="font-weight: bold;">{{post.likes}}</span> Likes</p>
+                    <p><span style="font-weight: bold;">{{pic.comment_set.all | length}}</span> Comments</p>
+
+                </div>
+                <button type="submit" name="post_id" value="{{object.id}}" class="btn btn-info">Like {{ post.likes }}</button>
 
                 <a href="{%url 'comment' post.id%}" class="btn btn-primary">Comment</a>
-                <form action="{% url 'like_post' %}" method="post">
+                <form action="{% url 'timeline' post.pk %}" method="post">
                     {% csrf_token %}
 
                 </form>

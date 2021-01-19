@@ -135,3 +135,15 @@ def like_image(request, pk):
     post= get_object_or_404(Image, id=request.POST.get('post_id'))
     post.likes.add(request.user)
     return HttpResponseRedirect(reverse('singlepic', args=[str(pk)]))
+
+
+@login_required
+def add_like(request, post_id):
+    post = Image.objects.filter(pk=post_id).first()
+    post.likes += 1
+    post.save()
+    all_posts = Image.get_all_posts()   
+    context = {
+        'pic': all_posts,
+    }    
+    return render(request, 'index.html', context)

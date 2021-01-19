@@ -7,7 +7,7 @@ class Image(models.Model):
     image= models.ImageField(upload_to ='image/')
     name= models.CharField(max_length=30)
     caption= models.CharField(max_length= 300)
-    likes=models.ManyToManyField(User, related_name='likes', blank=True)
+    likes = models.IntegerField(default=0)
     user = models.ForeignKey(User,on_delete = models.CASCADE)
     pub_date=models.DateTimeField(auto_now_add=True)
 
@@ -45,6 +45,15 @@ class Image(models.Model):
 
         searched_image = cls.objects.filter(name =search_term)
         return searched_image
+    @classmethod
+    def delete_post(cls, post_id):
+        post = cls.objects.filter(pk=post_id)
+        post.delete()
+
+    @classmethod
+    def get_all_posts(cls):
+        return cls.objects.order_by()
+
 
 
     def __str__(self):
@@ -66,7 +75,6 @@ class Profile(models.Model):
     def profiles_posts(self):
         return self.image_set.all()
 
-  
 
 
   
