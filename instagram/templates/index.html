@@ -3,9 +3,14 @@
     <h2 style="text-align: center;">News Feed</h2>
     <div class="row">
         {% for pic in posts %}
-
-
         <div class="card" style="width:500px">
+
+            <img src="https://www.flaticon.com/svg/vstatic/svg/3135/3135715.svg?token=exp=1611101340~hmac=1ede0416fd3666ab12273730431686ba" style="border-radius: 50%; " class="img-fluid" alt="dp" width="100px">
+            <h3>{{pic.user}}</h3>
+            <hr>
+
+
+            <p style="font-weight: bold;">{{post.user}}</p>
             <h2 style="text-align: center;" class="card-title pictitle"> {{pic.name}} </h2>
             <a href="/singlepic/{{pic.id}}">
                 <img class="timelinepics card-img-top" width="500px" height="450px" src=" {{pic.image.url}} " alt="Image"></a>
@@ -15,13 +20,13 @@
                 </h3>
                 <p class="card-text">Posted by: {{pic.user}}</p>
                 <div class="react">
-                    <a href="{% url 'singlepic' pic.id %}"><img src="https://img.icons8.com/ios-glyphs/30/000000/hearts.png" /></a>
+                    <a href="{% url 'timeline' pic.id %}"><img src="https://img.icons8.com/ios-glyphs/30/000000/hearts.png" /></a>
                     <a href="{%url 'comment' pic.id%}"><img data-toggle="collapse" data-target="#commentSec{{pic.id}}" src="https://img.icons8.com/metro/26/000000/comments.png" /></a>
                     </a>
                 </div>
                 <div class="react">
                     <p><span style="font-weight: bold;">{{pic.likes}}</span> Likes</p>
-                    <p><span style="font-weight: bold;">{{pic.comment_set.all | length}}</span> Comments</p>
+
 
                 </div>
 

@@ -15,12 +15,10 @@
                 </div>
                 <div class="react">
                     <p><span style="font-weight: bold;">{{post.likes}}</span> Likes</p>
-                    <p><span style="font-weight: bold;">{{pic.comment_set.all | length}}</span> Comments</p>
+
 
                 </div>
-                <button type="submit" name="post_id" value="{{object.id}}" class="btn btn-info">Like {{ post.likes }}</button>
 
-                <a href="{%url 'comment' post.id%}" class="btn btn-primary">Comment</a>
                 <form action="{% url 'timeline' post.pk %}" method="post">
                     {% csrf_token %}
 
